@@ -1,0 +1,23 @@
+{
+	auto_https off
+}
+
+localhost:80
+
+log {
+	level DEBUG
+}
+
+route /assets/* {
+	uri strip_prefix /assets
+
+	file_server {
+		fs s3 {
+			bucket "default"
+			region "us-east-1"
+			endpoint "http://localhost:9000"
+			force_path_style
+		}
+		pass_thru
+	}
+}

@@ -1,0 +1,42 @@
+version: '3'
+
+vars:
+  BUILD_DIR: build
+
+tasks:
+  build:
+    cmds:
+      - cmd: mkdir -p {{.BUILD_DIR}}
+        silent: true
+      - xcaddy build --output {{.BUILD_DIR}} --with github.com/sagikazarmark/caddy-fs-s3=.
+    sources:
+      - "*.go"
+      - "**/*.go"
+
+  run:
+    deps: [build]
+    cmds:
+      - "{{.BUILD_DIR}}/caddy run --watch"
+    env:
+        AWS_ACCESS_KEY_ID: admin
+        AWS_SECRET_ACCESS_KEY: admin1234
+
+  check:
+    deps: [build]
+    cmds:
+      - task: lint
+      - task: test
+
+  lint:
+    cmds:
+      - golangci-lint run --timeout 10m $LINT_ARGS
+
+  fix:
+    cmds:
+      - golangci-lint run --fix
+
+  test:
+    cmds:
+      - cmd: mkdir -p {{.BUILD_DIR}}
+        silent: true
+      - go test
