@@ -21,6 +21,10 @@ file_server {
 	fs s3 {
         bucket mybucket
         region us-east-1
+
+        # endpoint <endpoint>
+        # profile <profile>
+        # force_path_style
     }
 }
 ```
