@@ -23,20 +23,20 @@ var (
 	_ caddyfile.Unmarshaler = (*FS)(nil)
 )
 
-// FS implements a Caddy module and fs.FS for AWS S3.
+// FS is a Caddy virtual filesystem module for AWS S3 (and compatible) object store.
 type FS struct {
-	fs.StatFS
+	fs.StatFS `json:"-"`
 
-	// The name of the S3 bucket
+	// The name of the S3 bucket.
 	Bucket string `json:"bucket,omitempty"`
 
-	// The AWS region the bucket is hosted in
+	// The AWS region the bucket is hosted in.
 	Region string `json:"region,omitempty"`
 
-	// The AWS profile to use if mulitple profiles are specified in creds
+	// The AWS profile to use if mulitple profiles are specified.
 	Profile string `json:"profile,omitempty"`
 
-	// Use non-standard endpoint for S3
+	// Use non-standard endpoint for S3.
 	Endpoint string `json:"endpoint,omitempty"`
 
 	// Set this to `true` to force the request to use path-style addressing.
