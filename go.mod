@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go v1.36.24
 	github.com/caddyserver/caddy/v2 v2.6.2
 	github.com/jszwec/s3fs v0.4.0
-	go.uber.org/zap v1.23.0
+	go.uber.org/zap v1.24.0
 )
 
 require (
