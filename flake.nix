@@ -10,8 +10,22 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+      in
+      rec
+      {
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              git
+              go_1_19
+              gnumake
+              xcaddy
+              go-task
+              golangci-lint
+            ];
+          };
 
-        buildDeps = with pkgs; [ git go_1_19 gnumake xcaddy ];
-        devDeps = with pkgs; buildDeps ++ [ go-task golangci-lint ];
-      in { devShells.default = pkgs.mkShell { buildInputs = devDeps; }; });
+          ci = devShells.default;
+        };
+      });
 }
