@@ -1,6 +1,6 @@
 # Caddy FS module for AWS S3
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sagikazarmark/caddy-fs-s3/CI?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sagikazarmark/caddy-fs-s3/ci.yaml?style=flat-square)
 
 
 ## Installation
