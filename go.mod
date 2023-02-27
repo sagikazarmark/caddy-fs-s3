@@ -3,7 +3,7 @@ module github.com/sagikazarmark/caddy-fs-s3
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.209
+	github.com/aws/aws-sdk-go v1.44.210
 	github.com/caddyserver/caddy/v2 v2.6.2
 	github.com/jszwec/s3fs v0.4.0
 	go.uber.org/zap v1.24.0
