@@ -17,6 +17,7 @@ route /assets/* {
 			region "us-east-1"
 			endpoint "http://localhost:9000"
 			force_path_style
+			trim_path_suffix
 		}
 		pass_thru
 	}
