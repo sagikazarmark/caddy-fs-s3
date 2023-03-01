@@ -3,6 +3,7 @@ package caddyfss3
 import (
 	"errors"
 	"io/fs"
+	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -42,7 +43,24 @@ type FS struct {
 	// Set this to `true` to force the request to use path-style addressing.
 	S3ForcePathStyle bool `json:"force_path_style,omitempty"`
 
+	// Set this to `true` to force trimming of the / in path
+	TrimPathSuffix bool `json:"trim_path_suffix,omitempty"`
+
 	logger *zap.Logger
+}
+
+func (fs *FS) Stat(name string) (fs.FileInfo, error) {
+	if fs.TrimPathSuffix {
+		return fs.StatFS.Stat(strings.TrimSuffix(name, "/"))
+	}
+	return fs.StatFS.Stat(name)
+}
+
+func (fs *FS) Open(name string) (fs.File, error) {
+	if fs.TrimPathSuffix {
+		return fs.StatFS.Open(strings.TrimSuffix(name, "/"))
+	}
+	return fs.StatFS.Open(name)
 }
 
 // CaddyModule returns the Caddy module information.
@@ -54,6 +72,8 @@ func (FS) CaddyModule() caddy.ModuleInfo {
 }
 
 func (fs *FS) Provision(ctx caddy.Context) error {
+	fs.logger = ctx.Logger()
+
 	if fs.Bucket == "" {
 		return errors.New("bucket must be set")
 	}
@@ -113,6 +133,8 @@ func (fs *FS) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 			}
 		case "force_path_style":
 			fs.S3ForcePathStyle = true
+		case "trim_path_suffix":
+			fs.TrimPathSuffix = true
 		default:
 			return d.Errf("%s not a valid caddy.fs.s3 option", d.Val())
 		}
