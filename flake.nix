@@ -4,15 +4,16 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    ci.url = "github:sagikazarmark/nix-ci-utils";
+    ci.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, ci, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
       in
-      rec
-      {
+      rec {
         devShells = {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
@@ -26,6 +27,13 @@
           };
 
           ci = devShells.default;
-        };
-      });
+        }
+        //
+        (ci.lib.genShellsFromList [ "1_19" "1_20" ] (goVersion:
+          devShells.default.overrideAttrs (final: prev: {
+            buildInputs = [ pkgs."go_${goVersion}" ] ++ prev.buildInputs;
+          })
+        ));
+      }
+    );
 }
