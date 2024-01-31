@@ -4,12 +4,12 @@ import (
 	"errors"
 	"io/fs"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
-	"github.com/jszwec/s3fs"
+	"github.com/jszwec/s3fs/v2"
 	"go.uber.org/zap"
 )
 
@@ -39,6 +39,10 @@ type FS struct {
 	// Use non-standard endpoint for S3.
 	Endpoint string `json:"endpoint,omitempty"`
 
+	// Set this to `true` to enable the client to use path-style addressing.
+	UsePathStyle bool `json:"use_path_style,omitempty"`
+
+	// DEPRECATED: please use 'use_path_style' instead.
 	// Set this to `true` to force the request to use path-style addressing.
 	S3ForcePathStyle bool `json:"force_path_style,omitempty"`
 
@@ -58,31 +62,36 @@ func (fs *FS) Provision(ctx caddy.Context) error {
 		return errors.New("bucket must be set")
 	}
 
-	var config aws.Config
+	if fs.S3ForcePathStyle {
+		fs.logger.Warn("force_path_style is deprecated, please use use_path_style instead")
+	}
+
+	var configOpts []func(*config.LoadOptions) error
 
 	if fs.Region != "" {
-		config.Region = aws.String(fs.Region)
+		configOpts = append(configOpts, config.WithRegion(fs.Region))
 	}
 
-	if fs.Endpoint != "" {
-		config.Endpoint = aws.String(fs.Endpoint)
+	if fs.Profile != "" {
+		configOpts = append(configOpts, config.WithSharedConfigProfile(fs.Profile))
 	}
 
-	if fs.S3ForcePathStyle {
-		config.S3ForcePathStyle = aws.Bool(fs.S3ForcePathStyle)
-	}
-
-	sess, err := session.NewSessionWithOptions(session.Options{
-		Config:  config,
-		Profile: fs.Profile,
-	})
+	cfg, err := config.LoadDefaultConfig(ctx.Context, configOpts...)
 	if err != nil {
-		fs.logger.Error("could not create AWS session", zap.Error(err))
+		fs.logger.Error("could not create AWS config", zap.Error(err))
 		return err
 	}
 
+	client := s3.NewFromConfig(cfg, func(o *s3.Options) {
+		if fs.Endpoint != "" {
+			o.BaseEndpoint = aws.String(fs.Endpoint)
+		}
+
+		o.UsePathStyle = fs.UsePathStyle || fs.S3ForcePathStyle
+	})
+
 	// ReadSeeker is required by Caddy
-	fs.StatFS = s3fs.New(s3.New(sess), fs.Bucket, s3fs.WithReadSeeker)
+	fs.StatFS = s3fs.New(client, fs.Bucket, s3fs.WithReadSeeker)
 
 	return nil
 }
@@ -111,6 +120,8 @@ func (fs *FS) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 			if !d.AllArgs(&fs.Endpoint) {
 				return d.ArgErr()
 			}
+		case "use_path_style":
+			fs.UsePathStyle = true
 		case "force_path_style":
 			fs.S3ForcePathStyle = true
 		default:
