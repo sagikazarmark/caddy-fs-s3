@@ -16,7 +16,7 @@ route /assets/* {
 			bucket "default"
 			region "us-east-1"
 			endpoint "http://localhost:9000"
-			force_path_style
+			use_path_style
 		}
 		pass_thru
 	}
