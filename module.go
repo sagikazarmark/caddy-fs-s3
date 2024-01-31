@@ -45,8 +45,6 @@ type FS struct {
 	// DEPRECATED: please use 'use_path_style' instead.
 	// Set this to `true` to force the request to use path-style addressing.
 	S3ForcePathStyle bool `json:"force_path_style,omitempty"`
-
-	logger *zap.Logger
 }
 
 // CaddyModule returns the Caddy module information.
@@ -63,7 +61,7 @@ func (fs *FS) Provision(ctx caddy.Context) error {
 	}
 
 	if fs.S3ForcePathStyle {
-		fs.logger.Warn("force_path_style is deprecated, please use use_path_style instead")
+		ctx.Logger().Warn("force_path_style is deprecated, please use use_path_style instead")
 	}
 
 	var configOpts []func(*config.LoadOptions) error
@@ -78,7 +76,8 @@ func (fs *FS) Provision(ctx caddy.Context) error {
 
 	cfg, err := config.LoadDefaultConfig(ctx.Context, configOpts...)
 	if err != nil {
-		fs.logger.Error("could not create AWS config", zap.Error(err))
+		ctx.Logger().Error("could not create AWS config", zap.Error(err))
+
 		return err
 	}
 
