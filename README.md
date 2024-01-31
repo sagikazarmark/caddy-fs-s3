@@ -24,7 +24,7 @@ file_server {
 
 		# endpoint <endpoint>
 		# profile <profile>
-		# force_path_style
+		# use_path_style
 	}
 }
 ```
