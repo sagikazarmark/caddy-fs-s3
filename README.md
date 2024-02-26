@@ -15,6 +15,23 @@ xcaddy --with github.com/sagikazarmark/caddy-fs-s3
 ## Usage
 
 ```caddyfile
+example.com
+
+file_server {
+	fs s3 {
+		bucket mybucket
+		region us-east-1
+
+		# endpoint <endpoint>
+		# profile <profile>
+		# use_path_style
+	}
+}
+```
+
+## Usage with Caddy master/2.8.0+
+
+```caddyfile
 {
 	filesystem my-s3-fs s3 {
 		bucket mybucket
@@ -32,7 +49,6 @@ example.com {
     }
 }
 ```
-
 
 ## Development
 
