@@ -29,6 +29,26 @@ file_server {
 }
 ```
 
+## Usage with Caddy master/2.8.0+
+
+```caddyfile
+{
+	filesystem my-s3-fs s3 {
+		bucket mybucket
+		region us-east-1
+
+		# endpoint <endpoint>
+		# profile <profile>
+		# use_path_style
+	}
+}
+
+example.com {
+    file_server {
+        fs my-s3-fs
+    }
+}
+```
 
 ## Development
 
