@@ -3,7 +3,7 @@ module github.com/sagikazarmark/caddy-fs-s3
 go 1.21
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.25.2
+	github.com/aws/aws-sdk-go-v2 v1.26.1
 	github.com/aws/aws-sdk-go-v2/config v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.51.1
 	github.com/caddyserver/caddy/v2 v2.7.6
@@ -26,7 +26,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.20.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.23.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.28.1 // indirect
-	github.com/aws/smithy-go v1.20.1 // indirect
+	github.com/aws/smithy-go v1.20.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/caddyserver/certmagic v0.20.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
