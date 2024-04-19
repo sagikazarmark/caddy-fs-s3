@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     devenv.url = "github:cachix/devenv";
+    dagger.url = "github:dagger/nix";
+    dagger.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -16,6 +18,16 @@
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
       perSystem = { config, self', inputs', pkgs, system, ... }: rec {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+
+          overlays = [
+            (final: prev: {
+              dagger = inputs'.dagger.packages.dagger;
+            })
+          ];
+        };
+
         devenv.shells = {
           default = {
             languages = {
@@ -24,6 +36,7 @@
 
             packages = with pkgs; [
               git
+              dagger
               xcaddy
               go-task
               golangci-lint
