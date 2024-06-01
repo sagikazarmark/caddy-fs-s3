@@ -1,6 +1,7 @@
 # Caddy FS module for AWS S3
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sagikazarmark/caddy-fs-s3/ci.yaml?style=flat-square)
+![Caddy Version](https://img.shields.io/badge/caddy%20version-%3E=2.8.x-61CFDD.svg?style=flat-square)
 
 
 ## Installation
@@ -13,23 +14,6 @@ xcaddy --with github.com/sagikazarmark/caddy-fs-s3
 
 
 ## Usage
-
-```caddyfile
-example.com
-
-file_server {
-	fs s3 {
-		bucket mybucket
-		region us-east-1
-
-		# endpoint <endpoint>
-		# profile <profile>
-		# use_path_style
-	}
-}
-```
-
-## Usage with Caddy master/2.8.0+
 
 ```caddyfile
 {
@@ -49,6 +33,7 @@ example.com {
     }
 }
 ```
+
 
 ## Development
 

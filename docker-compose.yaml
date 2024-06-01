@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.10"
 
 services:
     minio:
@@ -8,7 +8,7 @@ services:
             MINIO_ROOT_USER: admin
             MINIO_ROOT_PASSWORD: admin1234
         volumes:
-          - ./var/minio:/data
+            - ./var/minio:/data
         ports:
-          - 127.0.0.1:9000:9000
-          - 127.0.0.1:9090:9090
+            - 127.0.0.1:9000:9000
+            - 127.0.0.1:9090:9090
