@@ -1,5 +1,12 @@
 {
 	auto_https off
+
+	filesystem my-s3-fs s3 {
+        bucket "default"
+        region "us-east-1"
+        endpoint "http://localhost:9000"
+        use_path_style
+	}
 }
 
 localhost:80
@@ -12,12 +19,7 @@ route /assets/* {
 	uri strip_prefix /assets
 
 	file_server {
-		fs s3 {
-			bucket "default"
-			region "us-east-1"
-			endpoint "http://localhost:9000"
-			use_path_style
-		}
+		fs my-s3-fs
 		pass_thru
 	}
 }

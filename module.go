@@ -3,6 +3,7 @@ package caddyfss3
 import (
 	"errors"
 	"io/fs"
+	"log/slog"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -10,7 +11,6 @@ import (
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
 	"github.com/jszwec/s3fs/v2"
-	"go.uber.org/zap"
 )
 
 func init() {
@@ -76,7 +76,7 @@ func (fs *FS) Provision(ctx caddy.Context) error {
 
 	cfg, err := config.LoadDefaultConfig(ctx.Context, configOpts...)
 	if err != nil {
-		ctx.Logger().Error("could not create AWS config", zap.Error(err))
+		ctx.Slogger().Error("could not create AWS config", slog.String("error", err.Error()))
 
 		return err
 	}
