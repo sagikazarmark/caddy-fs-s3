@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/aws/aws-sdk-go-v2 v1.27.0
 	github.com/aws/aws-sdk-go-v2/config v1.27.15
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.54.2
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.54.3
 	github.com/caddyserver/caddy/v2 v2.7.6
 	github.com/jszwec/s3fs/v2 v2.0.0
 	go.uber.org/zap v1.27.0
