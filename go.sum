@@ -1,5 +1,5 @@
-github.com/aws/aws-sdk-go-v2 v1.30.1 h1:4y/5Dvfrhd1MxRDD77SrfsDaj8kUkkljU7XE83NPV+o=
-github.com/aws/aws-sdk-go-v2 v1.30.1/go.mod h1:nIQjQVp5sfpQcTc9mPSr1B0PaWK5ByX9MOoDadSN4lc=
+github.com/aws/aws-sdk-go-v2 v1.30.2 h1:4xL6l0M1fbGWqRqfm5xXsnPkzzvtR4nEUDOZNjTuTvc=
+github.com/aws/aws-sdk-go-v2 v1.30.2/go.mod h1:ElN9h07Hy7l2xZounYhqIv1TxPy+31GGr4sEEZlOfDc=
 github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.3 h1:tW1/Rkad38LA15X4UQtjXZXNKsCgkshC3EbmcUmghTg=
 github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.3/go.mod h1:UbnqO+zjqk3uIt9yCACHJ9IVNhyhOCnYk8yA19SAWrM=
 github.com/aws/aws-sdk-go-v2/config v1.27.24 h1:NM9XicZ5o1CBU/MZaHwFtimRpWx9ohAUAqkG6AqSqPo=
@@ -61,8 +61,6 @@ github.com/google/pprof v0.0.0-20231212022811-ec68065c825e h1:bwOy7hAFd0C91URzMI
 github.com/google/pprof v0.0.0-20231212022811-ec68065c825e/go.mod h1:czg5+yv1E0ZGTi6S6vVK1mke0fV+FaUhNGcd6VRS9Ik=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/jmespath/go-jmespath v0.4.0 h1:BEgLn5cpjn8UN1mAw4NjwDrS35OdebyEtFe+9YPoQUg=
-github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
 github.com/jszwec/s3fs/v2 v2.0.0 h1:Y6UY8pW7KsJpx+hhYgmik9W3W2OiTYaY4r0J/8dGSh0=
 github.com/jszwec/s3fs/v2 v2.0.0/go.mod h1:juc0h9XDG+U/dDwOprq7p1VUFrumRA5B6XlBbuDysB8=
 github.com/klauspost/cpuid/v2 v2.0.12/go.mod h1:g2LTdtYhdyuGPqyWyv7qRAmj1WBqxuObKfj5c0PQa7c=
