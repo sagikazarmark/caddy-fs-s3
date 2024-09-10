@@ -8,7 +8,7 @@ tasks:
     cmds:
       - cmd: mkdir -p {{.BUILD_DIR}}
         silent: true
-      - xcaddy build --output {{.BUILD_DIR}} --with github.com/sagikazarmark/caddy-fs-s3=.
+      - xcaddy build --output {{.BUILD_DIR}}/caddy --with github.com/sagikazarmark/caddy-fs-s3=.
     sources:
       - "*.go"
       - "**/*.go"
