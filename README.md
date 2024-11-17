@@ -9,7 +9,7 @@
 Build Caddy using [xcaddy](https://github.com/caddyserver/xcaddy):
 
 ```shell
-xcaddy --with github.com/sagikazarmark/caddy-fs-s3
+xcaddy build --with github.com/sagikazarmark/caddy-fs-s3
 ```
 
 
