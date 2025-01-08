@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.32.7
 	github.com/aws/aws-sdk-go-v2/config v1.28.8
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.72.0
-	github.com/caddyserver/caddy/v2 v2.9.0
+	github.com/caddyserver/caddy/v2 v2.9.1
 	github.com/jszwec/s3fs/v2 v2.0.0
 )
 
@@ -27,7 +27,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.4 // indirect
 	github.com/aws/smithy-go v1.22.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/caddyserver/certmagic v0.21.5 // indirect
+	github.com/caddyserver/certmagic v0.21.6 // indirect
 	github.com/caddyserver/zerossl v0.1.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/francoispqt/gojay v1.2.13 // indirect
