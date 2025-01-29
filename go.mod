@@ -5,7 +5,7 @@ go 1.22.3
 require (
 	github.com/aws/aws-sdk-go-v2 v1.34.0
 	github.com/aws/aws-sdk-go-v2/config v1.29.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.74.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.75.0
 	github.com/caddyserver/caddy/v2 v2.9.1
 	github.com/jszwec/s3fs/v2 v2.0.0
 )
