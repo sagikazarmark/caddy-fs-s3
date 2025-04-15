@@ -52,21 +52,19 @@ Caddy will pick up the credentials automatically.
 
 ## Development
 
+**For an optimal developer experience, it is recommended to install [Nix](https://nixos.org/download.html) and [direnv](https://direnv.net/docs/installation.html).**
+
 Run Caddy with the following command:
 
 ```shell
-task run
+just run up --ports 8080:80
 ```
 
 When all coding and testing is done, please run the test suite:
 
 ```shell
-task check
+just check
 ```
-
-For the best developer experience, install [Nix](https://builtwithnix.org/) and [direnv](https://direnv.net/).
-
-Alternatively, install Go, xcaddy and the rest of the dependencies manually or using a package manager.
 
 ## License
 
