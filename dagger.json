@@ -1,0 +1,25 @@
+{
+  "name": "caddy-fs-s3",
+  "engineVersion": "v0.18.3",
+  "sdk": {
+    "source": "go"
+  },
+  "dependencies": [
+    {
+      "name": "go",
+      "source": "github.com/sagikazarmark/daggerverse/go@go/v0.9.0",
+      "pin": "d9ba06776c4c1ccf6f329bd862b9b439c4582ab6"
+    },
+    {
+      "name": "golangci-lint",
+      "source": "github.com/sagikazarmark/daggerverse/golangci-lint@golangci-lint/v0.9.0",
+      "pin": "e6c14178bcaaff9e102e2a89173ca31479b80629"
+    },
+    {
+      "name": "xcaddy",
+      "source": "github.com/sagikazarmark/daggerverse/xcaddy@xcaddy/v0.6.0",
+      "pin": "ceffda4aebd349a24fc00e591b4ed9b801535b65"
+    }
+  ],
+  "source": ".dagger"
+}

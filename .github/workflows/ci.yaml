@@ -8,41 +8,43 @@ on:
 permissions:
   contents: read
 
+env:
+  DAGGER_VERSION: 0.18.3
+
 jobs:
-  test:
-    name: Test
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
-        go: ["1.22", "1.23"]
+        go: ["1.23", "1.24"]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Set up Nix
-        uses: cachix/install-nix-action@3715ab1a11cac9e991980d7b4a28d80c7ebdd8f9 # v27
+      - name: Run pipeline
+        uses: dagger/dagger-for-github@e47aba410ef9bb9ed81a4d2a97df31061e5e842e # v8.0.0
         with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          verb: call
+          args: build --go-version ${{ matrix.go }}
+          version: ${{ env.DAGGER_VERSION }}
+  test:
+    name: Test
+    runs-on: ubuntu-latest
 
-      - name: Set up magic Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@87b14cf437d03d37989d87f0fa5ce4f5dc1a330b # v8
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Shell name
-        id: shell
-        run: echo "value=ci_$(echo "${{ matrix.go }}" | sed 's/\./_/')" >> "$GITHUB_OUTPUT"
-
-      - name: Prepare Nix shell
-        run: nix develop --impure .#${{ steps.shell.outputs.value }}
-
-      - name: Build
-        run: nix develop --impure .#${{ steps.shell.outputs.value }} -c task build
-
-      - name: Test
-        run: nix develop --impure .#${{ steps.shell.outputs.value }} -c task test
+      - name: Run pipeline
+        uses: dagger/dagger-for-github@e47aba410ef9bb9ed81a4d2a97df31061e5e842e # v8.0.0
+        with:
+          verb: call
+          args: test
+          version: ${{ env.DAGGER_VERSION }}
 
   lint:
     name: Lint
@@ -52,43 +54,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Set up Nix
-        uses: cachix/install-nix-action@3715ab1a11cac9e991980d7b4a28d80c7ebdd8f9 # v27
+      - name: Run pipeline
+        uses: dagger/dagger-for-github@e47aba410ef9bb9ed81a4d2a97df31061e5e842e # v8.0.0
         with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up magic Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@87b14cf437d03d37989d87f0fa5ce4f5dc1a330b # v8
-
-      - name: Prepare Nix shell
-        run: nix develop --impure .#ci
-
-      - name: Lint
-        run: nix develop --impure .#ci -c golangci-lint run --out-format=github-actions
-
-  dev:
-    name: Developer environment
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - name: Set up Nix
-        uses: cachix/install-nix-action@3715ab1a11cac9e991980d7b4a28d80c7ebdd8f9 # v27
-        with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up magic Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@87b14cf437d03d37989d87f0fa5ce4f5dc1a330b # v8
-
-      - name: Check
-        run: nix flake check --impure
-
-      - name: Dev shell
-        run: nix develop --impure
+          verb: call
+          args: lint
+          version: ${{ env.DAGGER_VERSION }}
 
   dependency-review:
     name: Dependency review
