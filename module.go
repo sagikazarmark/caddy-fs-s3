@@ -1,3 +1,4 @@
+// Package caddyfss3 implements a Caddy virtual filesystem module for AWS S3 (and compatible) object store.
 package caddyfss3
 
 import (
@@ -33,7 +34,7 @@ type FS struct {
 	// The AWS region the bucket is hosted in.
 	Region string `json:"region,omitempty"`
 
-	// The AWS profile to use if mulitple profiles are specified.
+	// The AWS profile to use if multiple profiles are specified.
 	Profile string `json:"profile,omitempty"`
 
 	// Use non-standard endpoint for S3.
@@ -55,6 +56,7 @@ func (FS) CaddyModule() caddy.ModuleInfo {
 	}
 }
 
+// Provision implements the [caddy.Provisioner] interface.
 func (fs *FS) Provision(ctx caddy.Context) error {
 	if fs.Bucket == "" {
 		return errors.New("bucket must be set")
