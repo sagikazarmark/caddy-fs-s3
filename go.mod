@@ -1,6 +1,6 @@
 module github.com/sagikazarmark/caddy-fs-s3
 
-go 1.22.3
+go 1.23.8
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.36.3
