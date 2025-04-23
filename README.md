@@ -1,7 +1,7 @@
 # Caddy FS module for AWS S3
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sagikazarmark/caddy-fs-s3/ci.yaml?style=flat-square)
-![Caddy Version](https://img.shields.io/badge/caddy%20version-%3E=2.9.x-61CFDD.svg?style=flat-square)
+![Caddy Version](https://img.shields.io/badge/caddy%20version-%3E=2.10.x-61CFDD.svg?style=flat-square)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/sagikazarmark/caddy-fs-s3?style=flat-square&color=61CFDD)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/sagikazarmark/caddy-fs-s3/badge?style=flat-square)](https://deps.dev/go/github.com%252Fsagikazarmark%252Fcaddy-fs-s3)
 
