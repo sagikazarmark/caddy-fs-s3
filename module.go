@@ -87,6 +87,7 @@ func (fs *FS) Provision(ctx caddy.Context) error {
 		if fs.Endpoint != "" {
 			o.BaseEndpoint = aws.String(fs.Endpoint)
 		}
+		// see https://tsak.dev/posts/aws-sdk-suppress-checksum-warning/
 		o.DisableLogOutputChecksumValidationSkipped = true
 		o.UsePathStyle = fs.UsePathStyle || fs.S3ForcePathStyle
 	})
