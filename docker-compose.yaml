@@ -1,5 +1,3 @@
-version: "3.10"
-
 services:
     minio:
         image: quay.io/minio/minio
