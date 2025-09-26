@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  DAGGER_VERSION: 0.18.3
+  DAGGER_VERSION: 0.18.19
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        go: ["1.24"]
+        go: ["1.24", "1.25"]
 
     steps:
       - name: Checkout repository
@@ -31,6 +31,7 @@ jobs:
           verb: call
           args: build --go-version ${{ matrix.go }}
           version: ${{ env.DAGGER_VERSION }}
+
   test:
     name: Test
     runs-on: ubuntu-latest
