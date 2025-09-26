@@ -27,7 +27,7 @@ func New(
 	}
 }
 
-var supportedGoVersions = []string{"1.24", "1.25"}
+var supportedGoVersions = []string{"1.25"}
 
 func (m *CaddyFsS3) Check(ctx context.Context) error {
 	p := pipeline.New(ctx)
