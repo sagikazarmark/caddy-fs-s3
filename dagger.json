@@ -1,6 +1,6 @@
 {
   "name": "caddy-fs-s3",
-  "engineVersion": "v0.18.19",
+  "engineVersion": "v0.19.10",
   "sdk": {
     "source": "go"
   },
@@ -21,5 +21,6 @@
       "pin": "ceffda4aebd349a24fc00e591b4ed9b801535b65"
     }
   ],
-  "source": ".dagger"
+  "source": ".dagger",
+  "disableDefaultFunctionCaching": true
 }
